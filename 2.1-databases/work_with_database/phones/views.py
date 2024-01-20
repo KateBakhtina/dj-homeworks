@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpRequest
+
 from phones.models import Phone
 
 
@@ -6,7 +8,7 @@ def index(request):
     return redirect('catalog')
 
 
-def show_catalog(request):
+def show_catalog(request: HttpRequest) -> HttpResponse:
     template = 'catalog.html'
     sort = request.GET.get('sort')
     if sort:
@@ -23,7 +25,7 @@ def show_catalog(request):
     return render(request, template, context=context)
 
 
-def show_product(request, slug):
+def show_product(request: HttpRequest, slug: str) -> HttpResponse:
     template = 'product.html'
     context = {
         'phone': Phone.objects.get(slug__exact=slug),

@@ -3,6 +3,8 @@ import csv
 from django.core.management.base import BaseCommand
 from django.utils.text import slugify
 from phones.models import Phone
+from main.settings import CSV_FILE
+
 
 
 class Command(BaseCommand):
@@ -10,18 +12,8 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
-        with open('phones.csv', 'r') as file:
+        with open(CSV_FILE, 'r') as file:
             phones = csv.DictReader(file, delimiter=';')
-
             for phone in phones:
-                phone_row = Phone(
-                    name = phone.get('name', ''),
-                    image = phone.get('image', ''),
-                    price = phone.get('price', ''),
-                    release_date = phone.get('release_date', ''),
-                    lte_exists = phone.get('lte_exists', ''),
-                    slug = slugify(phone.get('name', '')),
-                )
-                phone_row.save()
-
+                Phone(**phone, slug = slugify(phone.get('name', ''))).save()
         self.stdout.write(self.style.SUCCESS('Данные успешно добавлены'))

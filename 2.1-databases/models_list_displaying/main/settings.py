@@ -54,7 +54,7 @@ MIDDLEWARE = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'netology_models_list',
+        'NAME': 'netology_books',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -119,3 +119,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+JSON_FILE = os.path.join(BASE_DIR, 'fixtures/books.json')
