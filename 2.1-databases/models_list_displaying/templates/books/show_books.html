@@ -13,7 +13,9 @@
                     <div class="book col-md-4">
                         <h2>{{ book.name }}</h2>
                         <p>Автор: {{ book.author }}</p>
-                        <p>Дата публикации: {{ book.pub_date }}</p>
+                        <p>Дата публикации:
+                            <a href="{% url 'show_books_by_date' book.pub_date %}">{{ book.pub_date }}</a>
+                        </p>
                     </div>
                 {% endfor %}
             {% else %}
@@ -21,6 +23,31 @@
                     <h2>{{ books.name }}</h2>
                     <p>Автор: {{ books.author }}</p>
                     <p>Дата публикации: {{ books.pub_date }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block link %}
+    <div class="container">
+        <div class="row">
+            {% if 0 < previous_date_index < len_of_dates_list %}
+                <div class="previous_date col-md-4 text-left">
+                    <a href="{% url 'show_books_by_date' previous_date %}">{{ previous_date }}</a>
+                </div>
+            {% elif previous_date_index < 0 %}
+                <div class="previous_date col-md-4 text-left">
+                    <a href="">{{ previous_date }}</a>
+                </div>
+            {% endif %}
+            {% if 0 < next_date_index < len_of_dates_list %}
+                <div class="next_date col-md-4 text-right">
+                    <a href="{% url 'show_books_by_date' next_date %}">{{ next_date }}</a>
+                </div>
+            {% elif next_date_index >= len_of_dates_list %}
+                <div class="next_date col-md-4 text-right">
+                    <a href="">{{ next_date }}</a>
                 </div>
             {% endif %}
         </div>
