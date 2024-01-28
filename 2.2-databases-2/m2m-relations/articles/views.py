@@ -1,14 +1,13 @@
 from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse
 
-from articles.models import Article
+
+from articles.models import Article, Scope
 
 
-def articles_list(request):
+def articles_list(request: HttpRequest) -> HttpResponse:
     template = 'articles/news.html'
-    context = {}
-
-    # используйте этот параметр для упорядочивания результатов
-    # https://docs.djangoproject.com/en/3.1/ref/models/querysets/#django.db.models.query.QuerySet.order_by
-    ordering = '-published_at'
-
+    context = {
+        'object_list': Article.objects.all().prefetch_related('scopes'),
+    }
     return render(request, template, context)

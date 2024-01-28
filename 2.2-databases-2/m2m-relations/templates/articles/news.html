@@ -15,6 +15,7 @@
               <a href="#">{{ article.title }}</a>
             </h4>
             <p class="card-text">{{ article.text }}</p>
+            <p class="card-published_date">{{ article.published_at }}</p>
             {% for scope in article.scopes.all %}
               <span class="badge {% if scope.is_main %}badge-primary{% else %}badge-secondary{% endif %}">{{ scope.tag.name }}</span>
             {% endfor %}
