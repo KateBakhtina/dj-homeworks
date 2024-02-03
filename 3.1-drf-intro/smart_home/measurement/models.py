@@ -11,12 +11,13 @@ class Sensor(models.Model):
 
 class Measurement(models.Model):
 
-    sensors = models.ForeignKey(Sensor, related_name='measurements', on_delete=models.CASCADE)
+    sensor = models.ForeignKey(Sensor, related_name='measurements', on_delete=models.CASCADE)
     temperature = models.FloatField()
     datetime_measure = models.DateTimeField(default=timezone.now)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
-        return f'{self.sensors}: {self.temperature} {self.datetime_measure}'
+        return f'{self.sensor}: {self.temperature} {self.datetime_measure}'
 
 
 
