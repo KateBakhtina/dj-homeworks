@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('sensors/', SensorCreateGetView.as_view(), name='sensors'),
     path('sensors/<int:pk>/', SensorUpdateGetView.as_view()),
-    path('measurements/', MeasurementCreateView.as_view(), name='measurements'),
+    path('measurements/', MeasurementCreateView.as_view(), name='measurements')
 ]
 
 if settings.DEBUG:
