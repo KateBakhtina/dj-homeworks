@@ -19,7 +19,11 @@ class SensorCreateGetView(ListCreateAPIView):
 
 class SensorUpdateGetView(RetrieveUpdateAPIView):
     queryset = Sensor.objects.all()
-    serializer_class = SensorDetailSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'PATCH':
+            return SensorSerializer
+        return SensorDetailSerializer
 
 class MeasurementCreateView(CreateAPIView):
     queryset = Measurement.objects.all()
