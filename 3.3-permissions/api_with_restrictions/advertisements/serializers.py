@@ -56,7 +56,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-class UserAdvertisements(serializers.ModelSerializer):
+class UserAdvertisementSerializer(serializers.ModelSerializer):
     my_advertisements = AdvertisementSerializer(many=True, read_only=True)
 
     class Meta:
