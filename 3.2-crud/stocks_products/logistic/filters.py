@@ -1,6 +1,7 @@
 from rest_framework import filters
 
 class StockSearchFilter(filters.SearchFilter):
+    
     def get_search_terms(self, request):
         search_param = request.query_params.get('products', '')
         if search_param:
