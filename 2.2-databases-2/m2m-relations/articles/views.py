@@ -11,3 +11,5 @@ def articles_list(request: HttpRequest) -> HttpResponse:
         'object_list': Article.objects.all().prefetch_related('scopes'),
     }
     return render(request, template, context)
+
+
