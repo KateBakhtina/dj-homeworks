@@ -8,7 +8,7 @@ from students.models import Course
 
 @pytest.mark.django_db
 def test_courses_get_first_course(api_client, courses_factory):
-    course = courses_factory(_quantity=1)[0]
+    course = courses_factory()
     url = reverse("courses-detail", kwargs={"pk": course.id})
 
     assert Course.objects.count() == 1
@@ -33,7 +33,7 @@ def test_courses_get(api_client, courses_factory):
 
 @pytest.mark.django_db
 def test_courses_get_by_id(api_client, courses_factory):
-    course = courses_factory(_quantity=1)[0]
+    course = courses_factory()
 
     url = reverse("courses-detail", kwargs={"pk": course.id})
     response = api_client.get(url)
@@ -45,7 +45,7 @@ def test_courses_get_by_id(api_client, courses_factory):
 
 @pytest.mark.django_db
 def test_courses_filter_by_name(api_client, courses_factory):
-    course = courses_factory(_quantity=1)[0]
+    course = courses_factory()
 
     url = reverse("courses-list")
     response = api_client.get(url, data={"name": course.name})
@@ -69,7 +69,7 @@ def test_courses_post(api_client):
 
 @pytest.mark.django_db
 def test_courses_patch(api_client, courses_factory):
-    course = courses_factory(_quantity=1)[0]
+    course = courses_factory()
 
     url = reverse("courses-detail", kwargs={"pk": course.id})
 
